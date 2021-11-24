@@ -1,0 +1,23 @@
+{% extends "base_layout.html" %}
+
+{% block content %}
+<form class="site-form has-background-light" action="{% url 'articles:article_create' %}" method="post" enctype="multipart/form-data">
+    <div class="title has-text-centered is-size-4 has-text-weight-bold">Создать пост</div>
+    {% csrf_token %}
+    {% for field in form %}
+
+    <div class="field">
+        <label class="label" for="{{ field.id_for_label }}">
+            {{ field.label }}
+        </label>
+        {{ field }}
+    </div>
+
+    {% endfor %}
+    <div class="has-text-centered my-2">
+        <button type="submit" class="button is-success">Отправить</button>
+        <a href="{% url 'articles:article_list' %}" class="button is-danger">Отмена</a>
+    </div>
+    
+</form>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base_layout.html" %}
+
+{% block content %}
+<form class="site-form has-background-light has-text-dark " method="post">
+    <div class="title has-text-centered size-2 has-text-dark">Sign up</div>
+    {% csrf_token %}
+    {% for field in form %}
+
+    <div class="field">
+        <label class="label" for="{{ field.id_for_label }}">{{ field.html_name }}</label>
+        {{field}}
+        {% for error in field.errors %}
+        <p class="help is-danger">{{ error }}</p>
+        {% endfor %}
+    </div>
+    {% endfor %}
+    <button type="submit" class="button is-warning is-fullwidth my-4">Войти</button>
+    <p class='has-text-centered has-text-grey is-size-6'>
+        Already have an account?
+        <a href="{% url 'users:sign_in' %}">Sign in here</a>
+    </p>
+</form>
+{% endblock %}

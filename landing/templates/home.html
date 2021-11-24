@@ -1,0 +1,54 @@
+{% extends 'base_layout.html' %}
+{% load static from static %}
+
+{% block content %}
+<div class="container">
+    <div class="columns is-multiline is-centered">
+        {% for article in articles %}
+        <div class="column is-3">
+            <a href="{% url 'articles:article_detail' article.slug %}">
+                <div class="card is-centeredrf">
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-content">
+                                <p class="title has-text-dark has-text-weight-bold is-4 has-text-centered">
+                                    {{ article.shorten }}
+                                </p>
+                                <p class="subtitle is-4 has-text-grey has-text-centered">by {{ article.author }}</p>
+                            </div>
+                        </div>
+                        <div class="content has-text-centered">
+                            {{ article.snippet }}
+                            <br>
+                            <div>{{ article.date }}</div>
+                        </div>
+                        <div class="columns">
+                            <div class="column is-2">
+                                <div class="columns is-gapless">
+                                    <div class="column">
+                                        <ion-icon name="thumbs-up-outline"></ion-icon>
+                                    </div>
+                                    <div class="column">
+                                        <span class="ml-2">{{ article.total_likes }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column is-2">
+                                <div class="columns is-gapless">
+                                    <div class="column">
+                                        <ion-icon name="thumbs-down-outline"></ion-icon>
+                                    </div>
+                                    <div class="column">
+                                        <span class="ml-2">{{ article.total_dislikes }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% load static from static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'bulma.css' %}">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
+    <link rel="stylesheet" href="{% static 'all.css' %}">
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</head>
+
+<section class="hero has-background-info is-fullheight">
+    <div class="hero-head">
+        <header class="navbar">
+            <div class="container">
+                <div class="navbar-brand">
+                    <a class="navbar-item" href="{% url 'articles:article_list' %}">
+                        <img src="../../media//monday.svg" width="100" alt="Logo">
+                    </a>
+                    <span class="navbar-burger" data-target="navbarMenuHeroC">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                </div>
+                <div id="navbarMenuHeroC" class="navbar-menu">
+                    {% if user.is_authenticated %}
+                    <div class="navbar-start">
+                        <span class="navbar-item">
+                            <a href="{% url 'articles:article_create' %}" class="button has-text-weight-bold is-info is-inverted is-outlined">
+                                <span class="mr-2">
+                                    <ion-icon name="book-outline"></ion-icon>
+                                </span>
+                                Создать пост
+                            </a>
+                        </span>
+                    </div>
+                    <div class="navbar-end">
+                        <form action="{% url 'articles:article_list' %}" method="get">
+                            <div class="field has-addons mt-4 mr-2">
+                                <div class="control">
+                                    <input type="search" class="input" placeholder="Find an article" name="search">
+                                </div>
+                                <div class="control">
+                                    <button class="button is-primary" type="submit">
+                                        Search
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <button class="navbar-item button has-text-dark my-4 mx-1">
+                            Welcome: {{user}}
+                        </button>
+                        <a href="{% url 'users:sign_out' %}" class="navbar-item button is-danger my-4 mx-1">Sign out</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </header>
+    </div>
+    <div class="hero-body">
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+</section>
+
+</html>

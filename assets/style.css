@@ -1,0 +1,19 @@
+.site-form{
+    padding: 20px;
+    display: block;
+    margin: 10px auto auto;
+    width: 40%;
+    border-radius: 10px;
+}
+
+#thumb-clear_id{
+    display: none;
+}
+
+label[for="thumb-clear_id"]{
+    display: none;
+}
+
+.comment label[for="id_body"]{
+    display: none;
+}
